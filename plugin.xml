@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="EStats" lan="LAN_PLUGIN_IMPORT_NAME" version="0.01b" date="2017-09-02" compatibility="2.0" installRequired="true">
+	<author name="Ricardo Carvalho" url="http://selospt.tk" email="selo.fan@gmail.com" />
+	<description lan="LAN_PLUGIN_IMPORT_DESCRIPTION">Have extra stats using <a href='http://bbclone.de/'>BBClone</a> and other third party statsisitcal php scripts. This plugin is a updated and upgraded original BBclone plugin from DIPOrg (suporte@diporg.com)</description>
+	<category>stats</category>
+	<adminLinks>
+		<link url='admin_config.php' description='EStats' icon='images/bbclone.png' iconSmall='' primary='true'>BBClone</link>		
+	</adminLinks>	
+</e107Plugin>
