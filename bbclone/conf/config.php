@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: config.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: config.php 438 2023-05-02 20:46:43Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ $BBC_MAINSITE = "..";
 // Syntax:
 // $BBC_SHOW_CONFIG = 1;      => Display show_config.php
 // $BBC_SHOW_CONFIG = "";     => Don't display show_config.php (Default)
-$BBC_SHOW_CONFIG = "";
+$BBC_SHOW_CONFIG = "1";
 
 // The title being displayed in the navigation bar of all bbclone pages.
 // The following macros are recognised:
@@ -57,7 +57,7 @@ $BBC_TITLEBAR = "";
 // The following languages are supported:
 // ar, bg, bs, ca, cs, da, de, el, en, es, fi, fr, hu, id, it, ja, ko, lt, mk,
 // nb, nl, pl, pt, pt-br, ro, ru, sk, sl, sv, th, tr, ua, zh-cn and zh-tw.
-$BBC_LANGUAGE = "pt";
+$BBC_LANGUAGE = "en";
 
 // This variable defines the length of an unique visit in seconds. Each hit from the same visitor
 // within this period will be considered as one visit, as long as two successive hits don't exceed
@@ -141,13 +141,19 @@ $BBC_NO_DNS = "";
 // Please read the terms of use and privacy policy of the provider before using this!
 // These plug-ins are NO part of BBClone, please keep this in mind.
 // Syntax:
-// $BBC_EXT_LOOKUP = "";          => No external Look-Up used for IP address (Default)
-// $BBC_EXT_LOOKUP = "IP2EXT";    => Use the old IP2EXT to Look-Up IP addresses
-// $BBC_EXT_LOOKUP = "GEOIP";  	  => Use GeoIP API plug-in
-// $BBC_EXT_LOOKUP = "GEOIP-mod"; => Use GeoIP PHP/Perl Module (geoip.so)
+// $BBC_EXT_LOOKUP = "";                => No external Look-Up used for IP address (Default)
+// $BBC_EXT_LOOKUP = "IP2EXT";          => Use the old IP2EXT to Look-Up IP addresses
+// $BBC_EXT_LOOKUP = "GEOIP";           => Use GeoIP API plug-in
+// $BBC_EXT_LOOKUP = "GEOIP-mod";       => Use GeoIP PHP/Perl Module (geoip.so)
+// $BBC_EXT_LOOKUP = "GEOIP2-mod";      => Use GeoIP2 PHP/Perl Module (maxminddb.so)
+// $BBC_GEOIP_PATH = "geoip/";          => Path to GeoIP/GeoIP2 database(s)
+// $BBC_GEOIP2_DB  = "GeoLite2-Country.mmdb"; => GeoIP2/GeoLite2 database to use
 // (See http://www.maxmind.com for more details)
-$BBC_GEOIP_PATH = "geoip/";
+// $BBC_EXT_LOOKUP = "IP2LOCATION";     => Use IP2Location database
+// (See http://ip2Location.com for more details, PHP >=7.2.0)
 $BBC_EXT_LOOKUP = "";
+$BBC_GEOIP_PATH = "";
+$BBC_GEOIP2_DB  = "";
 
 // BBClone's default is to show hits in the time stats, because it gives a quite useful impression
 // from the actual server load. If, however, you prefer to use unique visits as base for your

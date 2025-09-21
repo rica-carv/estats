@@ -1,8 +1,8 @@
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: changelog.txt 360 2015-12-23 18:25:49Z matthys $
+ * SVN FILE $Id: changelog.txt 438 2023-05-02 20:46:43Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,16 @@
  *
  * See doc/copying.txt for details
  */
+
+0.8.0
+* Update: Fixes for php 8.X from Thijs
+* NEW: GeoIP2 PHP/Perl Module plugin added.
+* NEW: IP2Lacation PHP Module plugin added.(PHP >=7.2.0)
+* Update: Added new domains as there where some new additions.
+* Update: New detections for Browsers, OS and Robots.
+
+0.7.0
+* Update: Fixes for php 7.X from Steve
 
 0.6.4
 -----
