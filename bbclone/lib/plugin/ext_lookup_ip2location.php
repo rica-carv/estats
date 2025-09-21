@@ -1,7 +1,7 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: ext_lookup_geoip-mod.php 417 2022-12-21 11:27:14Z joku $
+ * SVN FILE $Id: ext_lookup_ip2locaton.php $Revision$ $Date$ $Author$ $
  *  
  * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
@@ -19,11 +19,24 @@
  */
 
 ////////////////////////////////////////////////////////////////////
-// Plug-in: Extension look-up by GeoIP PHP/Perl Module (geoip.so) //
+/* License
+ * Please review the General Terms and Conditions for the database licensing.
+ * https://lite.ip2location.com/terms-of-use
+ * (See http://ip2Location.com for more details, PHP >=7.2.0)
+ */
+////////////////////////////////////////////////////////////////////
+require './ip2location/autoload.php';
 ////////////////////////////////////////////////////////////////////
 
 function bbc_extension_plugin($host, $addr) {
-        return strtolower(geoip_country_code_by_name($addr));
+    global $BBC_GEOIP_PATH, $BBC_GEOIP2_DB;
+    
+// Default file I/O lookup
+$db = new \IP2Location\Database('./ip2location/data/IP2LOCATION-LITE-DB1.BIN', \IP2Location\Database::FILE_IO);
+
+$records = $db->lookup($addr , \IP2Location\Database::ALL);
+$country = $records['countryCode'];
+   return strtolower($country);
 }
 
 ?>

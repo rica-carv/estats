@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: constants.php 362 2015-12-23 18:39:12Z matthys $
+ * SVN FILE $Id: constants.php 443 2023-05-03 10:44:34Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,17 +28,12 @@ global $BBC_ROOT_PATH, $BBC_VERSION, $BBC_CACHE_PATH, $BBC_CONF_PATH,
 // BBClone's location relative from where it's been called
 $BBC_ROOT_PATH = defined("_BBCLONE_DIR") ? _BBCLONE_DIR : "";
 // BBClone version
-//$BBC_VERSION = "0.6.4";
-$BBC_VERSION = "0.6.4 SPt";
+$BBC_VERSION = "0.8.0";
 // Directory paths
 $BBC_CACHE_PATH  = $BBC_ROOT_PATH."var/";
 $BBC_CONF_PATH = $BBC_ROOT_PATH."conf/";
-//$BBC_CSS_PATH = "css/";
-//$BBC_IMAGES_PATH = "images/";
-// start mod selo_fan
-$BBC_CSS_PATH = "bbclone/css/";
-$BBC_IMAGES_PATH = "bbclone/images/";
-// end mod selo_fan
+$BBC_CSS_PATH = "css/";
+$BBC_IMAGES_PATH = "images/";
 $BBC_LANGUAGE_PATH = $BBC_ROOT_PATH."language/";
 $BBC_LIB_PATH = $BBC_ROOT_PATH."lib/";
 $BBC_PLUGIN_PATH = $BBC_LIB_PATH."plugin/";

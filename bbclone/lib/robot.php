@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: robot.php 355 2015-12-11 09:02:32Z matthys $
+ * SVN FILE $Id: robot.php 437 2023-05-02 20:27:38Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -290,7 +290,8 @@ $robot = array(
     "title" => "Amazon",
     "rule" => array(
       "^(aranhabot|amzn_assoc)" => "",
-      "^NutchEC2Test" => ""
+      "^NutchEC2Test" => "",
+      "Amazonbot[/ ]([0-9.]{1,10})" => "\\1"
     ),
     "uri" => "http://www.amazon.com/"
   ),
@@ -440,6 +441,15 @@ $robot = array(
     ),
     "uri" => ""
   ),
+  "apple" => array(
+	"icon" => "apple",
+	"title" => "Apple",
+	"rule" => array(
+	  "Applebot[ /]([0-9.]{1,10})" => "\\1"
+	),
+	"uri" => "http://www.apple.com/go/applebot"
+  ),
+
   "arachmo" => array(
     "icon" => "arachmo",
     "title" => "Arachmo",
@@ -1080,6 +1090,14 @@ $robot = array(
     ),
     "uri" => ""
   ),
+  "bubing" => array(
+    "icon" => "robot",
+    "title" => "BUbiNG",
+    "rule" => array(
+      "BUbiNG" => ""
+    ),
+    "uri" => "http://law.di.unimi.it/BUbiNG.html"
+   ), 
   "builtwith" => array(
     "icon" => "builtwith",
     "title" => "BuiltWith",
@@ -1211,6 +1229,14 @@ $robot = array(
     ),
     "uri" => "http://www.claymont.com"
   ),
+  "clipinc" => array(
+    "icon" => "clipinc",
+    "title" => "ClipInc",
+    "rule" => array(
+      "ClipInc" => ""
+    ),
+    "uri" => "http://tobit.software"
+  ),
   "clush" => array(
     "icon" => "clush",
     "title" => "Clush",
@@ -1239,7 +1265,8 @@ $robot = array(
 	"icon" => "coccoc",
 	"title" => "Coccoc",
 	"rule" => array(
-	  "coccoc[ /]([0-9.]{1,10})" => "\\1"
+	  "coccoc[ /]([0-9.]{1,10})" => "\\1",
+      "coccocbot-web[ /]([0-9.]{1,10})" => "\\1"
 	),
 	"uri" => "http://help.coccoc.com"
   ),
@@ -1441,6 +1468,7 @@ $robot = array(
     "title" => "DAUM",
     "rule" => array(
       "DAUMOA[ /]([0-9.]{1,10})" => "\\1",
+	  "Daum[ /]([0-9.]{1,10})" => "\\1",
       "DAUM Web Robot" => "",
       "daum.net" => "",
       "Daum Communications Corp" => "",
@@ -1640,7 +1668,8 @@ $robot = array(
     "icon" => "duckduckgo",
     "title" => "DuckDuckGo",
     "rule" => array(
-      "DuckDuckGo-Favicons-Bot[ /]([0-9.]{1,10})" => "\\1"
+      "DuckDuckGo-Favicons-Bot[ /]([0-9.]{1,10})" => "\\1",
+      "DuckDuckBot-Https[ /]([0-9.]{1,10})" => "\\1"
     ),
     "uri" => "http://duckduckgo.com"
   ),
@@ -1708,6 +1737,14 @@ $robot = array(
       "^EMPAS[_\-]ROBOT" => ""
     ),
     "uri" => ""
+  ),
+  "entfer" => array(
+    "icon" => "entfer",
+    "title" => "Entfer",
+    "rule" => array(
+      "EntferBot[ /]([0-9.]{1,10})" => "\\1"
+    ),
+    "uri" => "https://entfer.com"
   ),
   "entireweb" => array(
     "icon" => "entireweb",
@@ -2466,9 +2503,10 @@ $robot = array(
     "icon" => "robot",
     "title" => "Gzip Tester",
     "rule" => array(
+      "HTTP_Compression_Test" => "",
       "g(id)?zip[ \-]?test(er)?" => ""
     ),
-    "uri" => ""
+    "uri" => "http://whatsmyip.org/"
   ),
   "hanzoweb" => array(
     "icon" => "hanzoweb",
@@ -2498,7 +2536,8 @@ $robot = array(
     "icon" => "htmlparser",
     "title" => "HTMLParser",
     "rule" => array(
-      "HTMLParser[ /]([0-9.]{1,10})" => "\\1"
+      "HTMLParser[ /]([0-9.]{1,10})" => "\\1",
+      "lua-resty-http/0.10" => ""
     ),
     "uri" => "http://htmlparser.sourceforge.net/"
   ),
@@ -2834,6 +2873,14 @@ $robot = array(
     ),
     "uri" => "http://www.intravnews.com/"
   ),
+  "ionos" => array(
+      "icon" => "ionos",
+      "title" => "IONOS",
+      "rule" => array(
+          "IonCrawl" => ""
+      ),
+      "uri" => "https://www.ionos.de/terms-gtc/faq-crawler-en/"
+  ),
   "ip2location" => array(
     "icon" => "ip2location",
     "title" => "IP2LocationBot",
@@ -3080,6 +3127,14 @@ $robot = array(
     ),
     "uri" => "http://www.linkdex.com/bots/"
   ),
+  "linkedin" => array(
+	"icon" => "linkedin",
+	"title" => "LinkedIn",
+	"rule" => array(
+	  "LinkedInBot[ /]([0-9.]{1,10})" => "\\1"
+	),
+	"uri" => "http://www.linkedin.com"
+  ),		
   "linkguard" => array(
     "icon" => "robot",
     "title" => "Linkguard",
@@ -3121,7 +3176,7 @@ $robot = array(
       "Link[ \-]?(Chec(k|ker)|Val(et|idator))" => "",
       "Adaxas Spider" => "",
       "Agent-SharewarePlazaFileCheckBot[ /]([0-9.]{1,10})" => "\\1",
-      "NetMechanic V([0-9.]{1,10})" => "\\1",
+//      "NetMechanic V([0-9.]{1,10})" => "\\1",
       "^InfoLink" => "",
       "InternetLinkAgent" => "",
       "; SPENG\)" => "",
@@ -3625,6 +3680,14 @@ $robot = array(
       "Navisso(Bot)?" => ""
     ),
     "uri" => "http://www.navisso.com"
+  ),
+  "neevabot" => array(
+      "icon" => "neeva",
+      "title" => "Neeva",
+      "rule" => array(
+          "Neevabot[ /]([0-9.]{1,10})" => "\\1"
+      ),
+      "uri" => "https://neeva.com/neevabot"
   ),
   "neofonie" => array(
     "icon" => "robot",
@@ -4138,6 +4201,15 @@ $robot = array(
     ),
     "uri" => ""
   ),
+  "petalbot" => array(
+	"icon" => "huawei",
+	"title" => "PetalBot", // Huawei Search - also called Aspiegel
+	"rule" => array(
+	  "PetalBot" => "",
+	  "AspiegelBot" => ""
+	),
+	"uri" => "https://aspiegel.com/petalbot"
+  ),
   "php" => array(
     "icon" => "php",
     "title" => "PHP",
@@ -4292,13 +4364,21 @@ $robot = array(
     ),
     "uri" => ""
   ),
-  "probe" => array(
-    "icon" => "robot",
+  "pinterest" => array(
+    "icon" => "pinterest",
     "title" => "PROBE!",
     "rule" => array(
-      "^PROBE!" => ""
+      "Pinterest[ /]([0-9.]{1,10})" => "\\1"
     ),
-    "uri" => ""
+    "uri" => "http://www.pinterest.com/"
+  ),
+  "probe" => array(
+	"icon" => "robot",
+	"title" => "PROBE!",
+	"rule" => array(
+	  "^PROBE!" => ""
+	),
+	"uri" => ""
   ),
   "projecthoneypot" => array(
     "icon" => "projecthoneypot",
@@ -4452,6 +4532,14 @@ $robot = array(
       "www\.radian6\.com" => ""
     ),
     "uri" => "http://www.radian6.com"
+  ),
+  "radiofx" => array(
+    "icon" => "radiofx",
+    "title" => "Radio.fx",
+    "rule" => array(
+      "Radio.fx" => ""
+    ),
+    "uri" => "https://de.tobit.softwarw"
   ),
   "rambler" => array(
     "icon" => "rambler",
@@ -5598,7 +5686,8 @@ $robot = array(
     "icon" => "turnitin",
     "title" => "Turnitin",
     "rule" => array(
-      "TurnitinBot[ /]([0-9.]{1,10})" => "\\1"
+      "TurnitinBot[ /]([0-9.]{1,10})" => "\\1",
+      "^Turnitin" => ""
     ),
     "uri" => ""
   ),
@@ -5822,6 +5911,15 @@ $robot = array(
       "^Validator.nu/LV" => "\\1"
     ),
     "uri" => "http://validator.nu/"
+  ),
+    "validome" => array(
+    "icon" => "validome",
+    "title" => "Validome",
+    "rule" => array(
+      "web-validator[ /]([0-9.]{1,10})" => "\\1",
+      "web-validator" => "\\1"
+    ),
+        "uri" => "https://validome.org/"
   ),
   "verity" => array(
     "icon" => "robot",
@@ -6941,8 +7039,11 @@ $robot = array(
   ),
   "pythonurl" => array(
     "icon" => "pythonurl",
-    "title" => "Python-url",
+    "title" => "Python",
     "rule" => array(
+      "python-requests[ /]([0-9.]{1,10})" => "\\1",
+      "Python[ /]([0-9.]{1,10})" => "\\1",
+      "python-httpx[ /]([0-9.]{1,10})" => "\\1",
       "Python[ \-]?urllib" => ""
     ),
     "uri" => ""
@@ -6957,6 +7058,27 @@ $robot = array(
       "^FOTOCHECKER" => "",
       "^IPTC CHECK" => "",
       "^DataCha0s" => "",
+      "Datenprovider" => "",
+      "Domains Project" => "",
+      "ZoominfoBot" => "",
+      "nbertaupete95" => "",
+      "BLEXBot" => "",
+      "Softpile" => "",
+      "Expanse" => "",
+      "Hello World" => "",
+      "HTTP Banner" => "",
+      "Linux Gnu (cow)" => "",
+      "Mozilliqa" => "",
+      "cyberscan.io" => "",
+      "OPENVASVT" => "",
+      "researchscan" => "",
+      "CensysInspect[/ ]([0-9.]{1,10})" => "",
+      "InternetMeasurement[/ ]([0-9.]{1,10})" => "",
+      "seocompany[/ ]([0-9.]{1,10})" => "",
+      "tchelebi[/ ]([0-9.]{1,10})" => "",
+      "masscan[/ ]([0-9.]{1,10})" => "",
+      "l9tcpid[/ ]([0-9.]{1,10})" => "",
+      "zgrab[/ ]([0-9.]{1,10})" => "",
       "^Mac Finder" => "",
       "^Missigua Locator[ /]([0-9.]{1,10})" => "\\1",
       "^Missouri College Browse" => "",

@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: show_global.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: show_global.php 431 2023-04-29 06:32:02Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ function bbc_list_item($icon, $item, $item_score, $total_score) {
         ."\" class=\"icon\" alt=\"$item\" title=\"$item\" />&nbsp;&nbsp;</td>\n" : "")
         ."<td align=\"left\">$item&nbsp;</td>\n"
         ."<td align=\"right\">&nbsp;$item_score</td>\n"
-        ."<td align=\"right\">&nbsp;".sprintf("%.2f%%", (round(10000 * $item_score / $total_score) / 100))."</td>\n"
+        ."<td align=\"right\">&nbsp;".sprintf("%.2f%%", (round(10000 * $item_score / ($total_score ?: 1)) / 100))."</td>\n"
         ."</tr>\n";
 }
 
@@ -83,9 +83,7 @@ function bbc_rank_sum($cat, $flag = 0) {
 function bbc_refgen($ref) {
   global $translation;
 
-  if ($ref == "ignored") return "<i>".$translation['misc_ignored']."</i>";
-  if ($ref == "not_specified") return "<i>".$translation['gstat_not_specified']."</i>";
-
+  if ($ref == "not_specified") return "<i>".$translation['misc_ignored']."</i>";
   $ref_name = (($slash = strpos($ref, "/")) !== false) ? substr($ref, 0, $slash) : $ref;
 
   return "<script type=\"text/javascript\">\n"
@@ -103,6 +101,7 @@ function bbc_sort_page_count($page_a, $page_b) {
 
 // Main functions to generate Stats
 function bbc_show_browser() {
+  
   global $BBC_IMAGES_PATH, $BBC_LIB_PATH, $BBC_MAXBROWSER, $translation, $access;
 
   if (is_readable($BBC_LIB_PATH."browser.php")) require($BBC_LIB_PATH."browser.php");
@@ -110,14 +109,22 @@ function bbc_show_browser() {
 
   $browser_tab = isset($access['stat']['browser']) ? $access['stat']['browser'] : array();
 
-  for ($browser_total = 0; list(, $browser_score) = each($browser_tab); $browser_total += $browser_score);
-
+  $browser_total = 0;
+  foreach ($browser_tab as $browser_name => $browser_score) {
+      $browser_total += $browser_score;
+  }
+  
   arsort($browser_tab);
   reset($browser_tab);
 
   $str = bbc_rank_head($BBC_MAXBROWSER, "gstat_browsers");
+	
+  $k = 0;
+  foreach ($browser_tab as $browser_type => $browser_score) {
+	if($k > $BBC_MAXBROWSER-1) break; {
+	$k ++;
+	}
 
-  for ($k = 0; (list($browser_type, $browser_score) = each($browser_tab)) && ($k < $BBC_MAXBROWSER); $k++) {
     if (!isset($browser[$browser_type])) {
       $str.= bbc_list_item("browser/question.png", $browser_type, $browser_score, $browser_total, 'browser');
       continue;
@@ -127,29 +134,38 @@ function bbc_show_browser() {
 
     $str.= bbc_list_item("browser/".$browser[$browser_type]['icon'].".png", $browser[$browser_type]['title'],
                      $browser_score, $browser_total, 'browser');
-  }
-
+  }	 
+  
   $str .= bbc_rank_sum($browser_total);
   return $str;
 }
 
 function bbc_show_os() {
+
   global $BBC_IMAGES_PATH, $BBC_LIB_PATH, $BBC_MAXOS, $translation, $access;
 
   if (is_readable($BBC_LIB_PATH."os.php")) require($BBC_LIB_PATH."os.php");
   else return bbc_msg($BBC_LIB_PATH."os.php");
 
   $os_tab = isset($access['stat']['os']) ? $access['stat']['os'] : array();
-
-  for ($os_total = 0; list(, $os_score) = each($os_tab); $os_total += $os_score);
+ 
+  $os_total = 0;
+  foreach ($os_tab as $os_name => $os_score) {
+      $os_total += $os_score;
+  }
 
   arsort($os_tab);
   reset($os_tab);
 
   $str = bbc_rank_head($BBC_MAXOS, "gstat_operating_systems");
 
-  for ($k = 0; (list($os_type, $os_score) = each($os_tab)) && ($k < $BBC_MAXOS); $k++) {
-    if (!isset($os[$os_type])) {
+   $k = 0;
+   foreach ($os_tab as $os_type => $os_score) {
+	if($k > $BBC_MAXOS-1) break; {
+	$k ++;
+	}
+	
+	if (!isset($os[$os_type])) {
       $str.= bbc_list_item("os/question.png", $os_type, $os_score, $os_total, 'os');
       continue;
     }
@@ -164,19 +180,28 @@ function bbc_show_os() {
 }
 
 function bbc_show_extension() {
+
   global $access, $BBC_IMAGES_PATH, $BBC_MAXEXTENSION, $extensions, $translation;
 
   $ext_tab = isset($access['stat']['ext']) ? $access['stat']['ext'] : array();
 
-  for ($ext_total = 0; list(, $ext_score) = each($ext_tab); $ext_total += $ext_score);
+  $ext_total = 0;
+  foreach ($ext_tab as $ext_name => $ext_score) {
+      $ext_total += $ext_score;
+  }
 
   arsort($ext_tab);
   reset($ext_tab);
 
   $str = bbc_rank_head($BBC_MAXEXTENSION, "gstat_extensions");
 
-  for ($k = 0; (list($ext, $ext_score) = each($ext_tab)) && ($k < $BBC_MAXEXTENSION); $k++) {
-    if (isset($extensions[$ext])) $label = $extensions[$ext];
+    $k = 0;
+	foreach ($ext_tab as $ext => $ext_score) {
+	if($k > $BBC_MAXEXTENSION-1) break; {
+	$k ++;
+	}
+ 
+	if (isset($extensions[$ext])) $label = $extensions[$ext];
     else $label = $ext;
     $str .= bbc_list_item("ext/".$ext.".png", $label, $ext_score, $ext_total, 'ext');
   }
@@ -186,6 +211,7 @@ function bbc_show_extension() {
 }
 
 function bbc_show_robot() {
+
   global $access, $BBC_IMAGES_PATH, $BBC_LIB_PATH, $BBC_MAXROBOT, $translation;
 
   if (is_readable($BBC_LIB_PATH."robot.php")) require($BBC_LIB_PATH."robot.php");
@@ -193,15 +219,24 @@ function bbc_show_robot() {
 
   $robot_tab = isset($access['stat']['robot']) ? $access['stat']['robot'] : array();
 
-  for ($robot_total = 0; list(,$robot_score) = each($robot_tab); $robot_total += $robot_score);
+  $robot_total = 0;
+  foreach ($robot_tab as $robot_name => $robot_score) {
+      $robot_total += $robot_score;
+  }
 
   arsort($robot_tab);
   reset($robot_tab);
 
   $str = bbc_rank_head($BBC_MAXROBOT, "gstat_robots");
 
-  for ($k = 0; (list($robot_type, $robot_score) = each($robot_tab)) && ($k < $BBC_MAXROBOT); $k++) {
-    if (!isset($robot[$robot_type])) {
+    $k = 0;
+	foreach ($robot_tab as $robot_type => $robot_score) {
+	if($k > $BBC_MAXROBOT-1) break; {
+	$k ++;
+	}
+	
+	
+	if (!isset($robot[$robot_type])) {
       $str.= bbc_list_item("robot/robot.png", $robot_type, $robot_score, $robot_total, 'robot');
       continue;
     }
@@ -214,19 +249,28 @@ function bbc_show_robot() {
 }
 
 function bbc_show_top_hosts() {
+	
   global $access, $BBC_MAXHOST;
 
   $host_tab = isset($access['host']) ? $access['host'] : array();
 
-  for ($host_total = 0; list(, $host_score) = each($host_tab); $host_total += $host_score);
-
+  $host_total = 0;
+  foreach ($host_tab as $host_name => $host_score) {
+      $host_total += $host_score;
+  }
+  
   arsort($host_tab);
   reset($host_tab);
 
   $str = bbc_rank_head($BBC_MAXHOST, "gstat_hosts", 1);
 
-  for ($k = 0; ($k < $BBC_MAXHOST) && (list($host_name, $host_score) = each($host_tab)); $k++) {
-    $str .= bbc_list_item("", $host_name, $host_score, $host_total, 'hosts');
+    $k = 0;
+	foreach ($host_tab as $host_name => $host_score) {
+	if($k > $BBC_MAXHOST-1) break; {
+	$k ++;
+	}
+	
+	$str .= bbc_list_item("", $host_name, $host_score, $host_total, 'hosts');
   }
 
   $str .= bbc_rank_sum($host_total, 1);
@@ -238,14 +282,22 @@ function bbc_show_top_pages() {
 
   $page_tab = isset($access['page']) ? $access['page'] : array();
 
-  for ($page_total = 0; list(, $page_elem) = each($page_tab); $page_total += $page_elem['count']);
+  $page_total = 0;
+  foreach ($page_tab as $page_name => $page_elem) {
+      $page_total += $page_elem['count'];
+  }
 
   uasort($page_tab, "bbc_sort_page_count");
   reset($page_tab);
 
   $str = bbc_rank_head($BBC_MAXPAGE, "gstat_pages", 1);
 
-  for ($k = 0; (list($page_name, $page_elem) = each($page_tab)) && ($k < $BBC_MAXPAGE); $k++) {
+  $k = 0;
+  foreach ($page_tab as $page_name => $page_elem) {
+	if($k > $BBC_MAXPAGE-1) break; {
+	$k ++;
+	}
+
     $page_name = ($page_name == "index") ? $translation['navbar_main_site'] : $page_name;
 
     $str .= bbc_list_item("", "<a href=\"".$page_elem['uri']."\">$page_name</a>", $page_elem['count'], $page_total, 'pages');
@@ -260,15 +312,23 @@ function bbc_show_top_origins() {
 
   $referer_tab = isset($access['referer']) ? $access['referer'] : array();
 
-  for ($referer_total = 0; list(, $referer_score) = each($referer_tab); $referer_total += $referer_score);
+  $referer_total = 0;
+  foreach ($referer_tab as $referer_name => $referer_score) {
+      $referer_total += $referer_score;
+  }
 
   arsort($referer_tab);
   reset($referer_tab);
 
   $str = bbc_rank_head($BBC_MAXORIGIN, "gstat_origins", 1);
 
-  for ($k = 0; ($k < $BBC_MAXORIGIN) && (list($referer_name, $referer_score) = each($referer_tab)); $k++) {
-    $str .= bbc_list_item("", bbc_refgen($referer_name), $referer_score, $referer_total, 'origins');
+  $k = 0;
+	foreach ($referer_tab as $referer_name => $referer_score) {
+	if($k > $BBC_MAXORIGIN-1) break; {
+	$k ++;
+	}
+	
+	$str .= bbc_list_item("", bbc_refgen($referer_name), $referer_score, $referer_total, 'origins');
   }
 
   $str .= bbc_rank_sum($referer_total, 1);
@@ -280,15 +340,23 @@ function bbc_show_top_keys() {
 
   $key_tab = isset($access['key']) ? $access['key'] : array();
 
-  for ($key_total = 0; list(, $key_score) = each($key_tab); $key_total += $key_score);
+  $key_total = 0;
+  foreach ($key_tab as $key_name => $key_score) {
+      $key_total += $key_score;
+  }
 
   arsort($key_tab);
   reset($key_tab);
 
   $str = bbc_rank_head($BBC_MAXKEY, "gstat_keys", 1);
 
-  for ($k = 0; ($k < $BBC_MAXKEY) && (list($key_name, $key_score) = each($key_tab)); $k++) {
-    $str .= bbc_list_item("", $key_name, $key_score, $key_total, 'keys');
+  $k = 0;
+	foreach ($key_tab as $key_name => $key_score) {
+	if($k > $BBC_MAXKEY-1) break; {
+	$k ++;
+	}
+	
+	$str .= bbc_list_item("", $key_name, $key_score, $key_total, 'keys');
   }
 
   $str .= bbc_rank_sum($key_total, 1);

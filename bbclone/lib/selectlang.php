@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: selectlang.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: selectlang.php 417 2022-12-21 11:27:14Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,15 +30,14 @@ $BBC_HTML = new BBC_HTML;
 
 if (is_readable($BBC_LANGUAGE_PATH.$BBC_HTML->lng.".php")) require_once($BBC_LANGUAGE_PATH.$BBC_HTML->lng.".php");
 // When no detection, use English language as default
-elseif (is_readable($BBC_LANGUAGE_PATH."en.php")) {
-}
+elseif (is_readable($BBC_LANGUAGE_PATH."en.php")) { require_once($BBC_LANGUAGE_PATH."en.php"); }
 else exit(bbc_msg($BBC_LANGUAGE_PATH."en.php"));
 
 /**
  * Format date/time according to given format string, in the selected language.
- * @param $format date format, as per PHP specs
- * @param $timestamp the timestamp to format
- * @return String with formatted timestamp
+ * param1 $format date format, as per PHP specs
+ * param2 $timestamp the timestamp to format
+ * return String with formatted timestamp
  */
 function date_format_translated($format, $timestamp) {
 	global $translation;

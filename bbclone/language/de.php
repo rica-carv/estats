@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: de.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: de.php 417 2022-12-21 11:27:14Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -332,7 +332,7 @@ $translation = array(
 "global_month_format" => "F Y",
 
 // Global translation
-"global_titlebar"=> "Statistiks für %SERVER generiert am %DATE",
+"global_titlebar"=> "Statistik für %SERVER generiert am %DATE",
 "global_bbclone_copyright" => "Das BBClone Team - Lizensiert unter der",
 "global_last_reset" => "Statistik zuletzt zurückgesetzt am",
 "global_yes" => "ja",

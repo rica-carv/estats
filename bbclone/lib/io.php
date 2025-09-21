@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: io.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: io.php 417 2022-12-21 11:27:14Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 // remove unwanted stuff from user input
 function bbc_clean($input, $sep = 0) {
-  $sp = strpos($input, $sep);
+  $sp = strpos($input, strval($sep));
   // only look for separator if really needed
   $input = (!empty($sep) && ($sp !== false)) ? substr($input, 0, $sp) : $input;
   $input = strip_tags(str_replace("\\", "/", stripslashes($input)));
@@ -131,7 +131,7 @@ function bbc_array_to_str(&$tab) {
 
   reset($tab);
 
-  while (list($key, $val) = each($tab)) {
+ foreach($tab as $key => $val) {
     // The separator treatment
     if (($last_is_array) || (is_array($val) && ($k !== 0))) {
       $str .= $sep."\n";

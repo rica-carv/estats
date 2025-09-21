@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: show_detailed.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: show_detailed.php 417 2022-12-21 11:27:14Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -169,7 +169,7 @@ function bbc_rows_gen() {
   	$style_class = $BBC_HTML->connect_color_class($last['traffic'][$k]);
     $str .= "<tr class=\"$style_class hover_white\">\n";
     reset($fields);
-    while (list(, $val) = each($fields)) {
+    foreach ($fields as $key => $val) {
       $cell = bbc_show_connect_field($last['traffic'][$k], $val, $BBC_HTML->lng, $last['pages']);
       $str .= "<td class=\"cell\">".(empty($cell) ? "&nbsp;" : $cell)."</td>\n";
     }

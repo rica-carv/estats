@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: browser.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: browser.php 425 2023-03-19 21:23:43Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -457,7 +457,8 @@ $browser = array(
     "icon" => "edge",
     "title" => "Edge",
     "rule" => array(
-      "Edge/([0-9.]{1,10})" => "\\1"
+        "Edge/([0-9.]{1,10})" => "\\1",
+        "Edg/([0-9.]{1,15})" => "\\1"
     ),
     "uri" => "http://www.microsoft.com/"
   ),
@@ -1027,7 +1028,8 @@ $browser = array(
     "title" => "Opera",
     "rule" => array(
       "opera.+Version[ /]([x0-9.]{1,10})" => "\\1",
-      "opera[ /]([0-9.]{1,10})" => "\\1"
+      "opera[ /]([0-9.]{1,10})" => "\\1",
+      "OPR[ /]([0-9.]{1,10})" => "\\1"
     ),
     "uri" => "http://www.opera.com/"
   ),
@@ -1375,6 +1377,14 @@ $browser = array(
     ),
     "uri" => "http://sourceforge.net/projects/syndirella/"
   ),
+    "tazweb" => array(
+    "icon" => "tazweb",
+    "title" => " TazWeb",
+    "rule" => array(
+      "TazWeb[ /]([0-9a-z.]{1,10})" => "\\1"
+    ),
+    "uri" => ""
+  ),
   "thunderbird" => array(
     "icon" => "thunderbird",
     "title" => "Thunderbird",
@@ -1420,9 +1430,18 @@ $browser = array(
     "icon" => "vlc",
     "title" => "VLC",
     "rule" => array(
-      "^VLC media player - version ([0-9.]{1,10})" => "\\1"
+      "^VLC media player - version ([0-9.]{1,10})" => "\\1",
+      "VLC/([0-9.]{1,10})" => "\\1"
     ),
     "uri" => "http://www.videolan.org/vlc/"
+  ),
+  "vivaldi" => array(
+    "icon" => "vivaldi",
+    "title" => "Vivaldi",
+    "rule" => array(
+      "Vivaldi[ /]([0-9.]{1,10})" => "\\1"
+    ),
+    "uri" => "https://vivaldi.com/"
   ),
   "voyager" => array(
     "icon" => "voyager",

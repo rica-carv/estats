@@ -3,7 +3,7 @@
  * 
  * SVN FILE $Id: en.php 45 2013-11-30 20:11:36Z matthys $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

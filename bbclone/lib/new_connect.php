@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: new_connect.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: new_connect.php 417 2022-12-21 11:27:14Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -63,10 +63,18 @@ function bbc_update_connect($connect) {
   foreach (array("robot", "browser", "os") as $rule) {
     reset($$rule);
 
-    while (list(${$rule."_name"}, ${$rule."_elem"}) = each($$rule)) {
-      reset(${$rule."_elem"}['rule']);
+    //while (list(${$rule."_name"}, ${$rule."_elem"}) = each($$rule)) {
+    //reset(${$rule."_elem"}['rule']);
+    //fix for depreciated each() 5/2020
 
-      while (list($pattern, $note) = each(${$rule."_elem"}['rule'])) {
+	foreach($$rule as ${$rule."_name"} => ${$rule."_elem"})	 {
+	reset(${$rule."_elem"}['rule']);
+
+
+      //while (list($pattern, $note) = each(${$rule."_elem"}['rule']))
+      //fix for depreciated each() 5/2020
+
+	foreach(${$rule."_elem"}['rule'] as $pattern => $note){
 		if (!preg_match('~'.$pattern.'~i', $connect['agent'], $regs)) continue;
         $connect[$rule] = ${$rule."_name"};
 

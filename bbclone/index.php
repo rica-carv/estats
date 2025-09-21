@@ -1,7 +1,7 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: ext_lookup_geoip-mod.php 417 2022-12-21 11:27:14Z joku $
+ * SVN FILE $Id: index.php 417 2022-12-21 11:27:14Z joku $
  *  
  * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
@@ -18,12 +18,7 @@
  * See doc/copying.txt for details
  */
 
-////////////////////////////////////////////////////////////////////
-// Plug-in: Extension look-up by GeoIP PHP/Perl Module (geoip.so) //
-////////////////////////////////////////////////////////////////////
-
-function bbc_extension_plugin($host, $addr) {
-        return strtolower(geoip_country_code_by_name($addr));
-}
-
+if(!defined("_BBC_PAGE_NAME")){define("_BBC_PAGE_NAME", "BBClone - Start Page");}
+// Show by default the Global Stats
+if (is_readable("show_global.php")) include_once("show_global.php");
 ?>

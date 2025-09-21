@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: marker.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: marker.php 417 2022-12-21 11:27:14Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -287,7 +287,7 @@ class bbc_marker {
   }
 
   // constructor
-  function bbc_marker() {
+    public function __construct() {
     if (_BBC_PHP < 410) global $HTTP_SERVER_VARS;
 
     global $BBC_CACHE_PATH, $BBC_COUNTER_PREFIX, $BBC_COUNTER_SUFFIX, $BBC_IGNORE_IP, $BBC_SEP, $BBC_TIMESTAMP,

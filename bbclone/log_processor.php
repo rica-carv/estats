@@ -1,9 +1,9 @@
 <?php
 /* This file is part of BBClone (A PHP based Web Counter on Steroids)
  * 
- * SVN FILE $Id: log_processor.php 356 2015-12-11 10:49:19Z joku $
+ * SVN FILE $Id: log_processor.php 417 2022-12-21 11:27:14Z joku $
  *  
- * Copyright (C) 2001-2016, the BBClone Team (see doc/authors.txt for details)
+ * Copyright (C) 2001-2023, the BBClone Team (see doc/authors.txt for details)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,9 @@ function bbc_sort_time_sc($row_a, $row_b) {
 function bbc_get_key($array, $str) {
   reset($array);
 
-  while (list($idx, $val) = each($array)) {
+  //while (list($idx, $val) = each($array))
+  // fix for each derpecated 5/2020
+	foreach($array as $idx => $val)	  {
     if ($val == $str) return $idx;
   }
   return 0;
